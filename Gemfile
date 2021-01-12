@@ -20,9 +20,25 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'devise'
 gem 'omniauth-facebook'
 gem 'figaro'
+
+gem 'devise-i18n'
+gem 'devise'
+gem 'devise-bootstrap-views'
+
+# gem 'bootstrap', '~> 4.0'
+# gem "bootstrap_form", ">= 4.0.0.alpha1"
+# gem 'devise' # gem 'devise-i18n'
+# # gem 'devise_invitable'
+# gem 'devise-bootstrap-form'
+
+# gem 'devise-i18n-views'
+# gem 'twitter-bootstrap-rails'
+# gem 'devise-bootstrap-views', '~> 1.0'
+# gem 'bootstrap', '~> 4.3'
+
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
