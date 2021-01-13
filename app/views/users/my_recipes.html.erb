@@ -1,0 +1,21 @@
+<h1>Users#my_recipes</h1>
+<p>Find me in app/views/users/my_recipes.html.erb</p>
+
+<p> Add a recipe <p>
+
+<div class='search-area'>
+    <h3>Search your recipes</h3>
+    <%=form_tag '/search_recipes', method: :get do%>
+        <div class="form-group row">
+            <div class ="col-sm-9 no-right-padding" >
+                <%= text_field_tag :recipe, params[:recipe], placeholder: "Enter a recipe name or ingredient", autofocus:true, class: "form-control form-control-lg"%>
+            </div>
+
+            <div class="col-sm-3 no-left-padding" >
+                <%= button_tag type: :submit, class: "btn btn-success" do%>
+                    <%= fa_icon 'search 2x' %>
+                <%end%>
+            </div>
+        </div>
+    <%end%>
+</div>

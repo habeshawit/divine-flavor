@@ -27,6 +27,8 @@ gem 'devise-i18n'
 gem 'devise'
 gem 'devise-bootstrap-views'
 
+gem "font-awesome-rails"
+
 # gem 'bootstrap', '~> 4.0'
 # gem "bootstrap_form", ">= 4.0.0.alpha1"
 # gem 'devise' # gem 'devise-i18n'
