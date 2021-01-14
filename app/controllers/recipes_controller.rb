@@ -41,10 +41,10 @@ class RecipesController < ApplicationController
     end
     
     def search_my_recipes
-        @recipes = current_user.recipes.all.select { |recipe|  recipe.name.downcase.include?(params[:recipe].downcase)} #change to including if any word/ also only current user
-        # @recipes = current_user.recipes.where('lower(name) = ?' LIKE params[:recipe].downcase)
+        @recipes = current_user.recipes.all.select { |recipe|  recipe.name.downcase.include?(params[:recipe].downcase) || recipe.ingredients.downcase.include?(params[:recipe].downcase)}         # @recipes = current_user.recipes.where('lower(name) = ?' LIKE params[:recipe].downcase)
         # binding.pry
         if @recipes.empty?
+            
             flash[:alert] = "No matching recipes found"
             redirect_to '/my_recipes'
         else
@@ -53,7 +53,7 @@ class RecipesController < ApplicationController
     end
 
     def search_all_recipes
-        @recipes = Recipe.all.select { |recipe|  recipe.name.downcase.include?(params[:recipe].downcase)} #change to including if any word/ also only current user
+        @recipes = Recipe.all.select { |recipe|  recipe.name.downcase.include?(params[:recipe].downcase) || recipe.ingredients.downcase.include?(params[:recipe].downcase)} 
         if @recipes.empty?
             flash[:alert] = "No matching recipes found"
             redirect_to '/recipes'

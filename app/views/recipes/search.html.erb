@@ -1,5 +1,5 @@
 <% if !@recipes.empty?%>
-    <%=@recipes.map do |recipe|%>
+    <%@recipes.each do |recipe|%>
         <%= link_to recipe.name, recipe_path(recipe)%><br>
     <%end%>
 

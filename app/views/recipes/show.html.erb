@@ -6,7 +6,9 @@
 <%end%><br>
 
 <h6>Instructions:</h6>
-<%=@recipe.instructions%><br><br>
+<%@recipe.instructions.split("\r\n").each do |step|%>
+    <%= step%><br>
+<%end%><br>
 
 
 <% if @recipe.user_id == current_user.id%>
@@ -25,7 +27,7 @@
 
 
 <%if !@recipe.comments.empty?%>
-    <%= @comments.map do |comment|%>
+    <% @comments.each do |comment|%>
        <br> <%= comment.user.name%> says: <%= comment.content%>      
     <%end%>
 <%end%>
