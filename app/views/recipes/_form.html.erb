@@ -1,0 +1,27 @@
+<%= form_for @recipe do |f| %>
+  <div class="form-group">
+  
+    <%= f.label :name %>
+    <%= f.text_field :name, :class=>"form-control", placeholder:"Give your recipe a name"%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ingredients %>
+    <%= f.text_area :ingredients, :class=>"form-control", rows:"3", placeholder:"Add Ingredients and Quantity" %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :instructions %>
+    <%= f.text_area :instructions, :class=>"form-control", rows:"3", placeholder:"Add Instructions" %>
+  </div>
+
+
+    <%= f.button "Submit", :class=>"btn btn-success"%>
+
+  <% end %>
+
+
+  </div>
+
+
