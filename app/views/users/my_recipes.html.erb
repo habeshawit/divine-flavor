@@ -3,23 +3,27 @@
 <p> <%= link_to "Add a recipe", new_recipe_path %> |
  <%= link_to "Back to all recipe", recipes_path %> <p>
 
-<div class='search-area'>
-    <h3>Search your recipes</h3>
-    <%=form_tag '/search_my_recipes', method: :get do%>
-        <div class="form-group row">
-            <div class ="col-sm-9 no-right-padding" >
-                <%= text_field_tag :recipe, params[:recipe], placeholder: "Enter a recipe name or ingredient", autofocus:true, class: "form-control form-control-lg"%>
-            </div>
+<%if current_user.recipes.empty?%>
+<%= "You do not have any recipes yet. Add a recipe to begin!"%>
+<%else%>
+    <div class='search-area'>
+        <h3>Search your recipes</h3>
+        <%=form_tag '/search_my_recipes', method: :get do%>
+            <div class="form-group row">
+                <div class ="col-sm-9 no-right-padding" >
+                    <%= text_field_tag :recipe, params[:recipe], placeholder: "Enter a recipe name or ingredient", autofocus:true, class: "form-control form-control-lg"%>
+                </div>
 
-            <div class="col-sm-3 no-left-padding" >
-                <%= button_tag type: :submit, class: "btn btn-success" do%>
-                    <%= fa_icon 'search 2x' %>
-                <%end%>
+                <div class="col-sm-3 no-left-padding" >
+                    <%= button_tag type: :submit, class: "btn btn-success" do%>
+                        <%= fa_icon 'search 2x' %>
+                    <%end%>
+                </div>
             </div>
-        </div>
-    <%end%>
-</div>
+        <%end%>
+    </div>
 
-<%current_user.recipes.each do |recipe|%>
-    <%= link_to recipe.name, recipe_path(recipe)%> <br>
+    <%current_user.recipes.each do |recipe|%>
+        <%= link_to recipe.name, recipe_path(recipe)%> <br>
+    <%end%> 
 <%end%>

@@ -1,0 +1,12 @@
+<h3>All Comments</h3>
+    
+<%if @comments.empty?%>
+    There are no comments on this recipe
+    <br><%= link_to "See all other comments", comments_path%>
+
+<%else%>
+    <%@comments.each do |comment|%>
+        <%= link_to comment.user.name %> said: "<%=comment.content%>" about <%= link_to comment.recipe.name, recipe_path(comment.recipe)%><br>
+    <%end%>
+
+<%end%><br><br>

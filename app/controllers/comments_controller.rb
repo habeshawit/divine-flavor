@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    before_action :find_recipe, except: [:user_comments]
+    before_action :find_recipe, except: [:index, :user_comments, :all_comments]
     before_action :authenticate_user!
   
     def new
@@ -19,12 +19,15 @@ class CommentsController < ApplicationController
     end
   
     def index
-      if params[:recipe_id]
-        @recipe = Recipe.find_by(id: params[:recipe_id])
+      if params[:recipe_id] && @recipe = Recipe.find_by(id: params[:recipe_id])
         @comments = @recipe.comments
         render :index
+      else
+        flash[:alert] = "Unable to find recipe" if params[:recipe_id]
+        @comments = Comment.all
       end
     end
+
   
     def user_comments
       if params[:user_id]
