@@ -5,7 +5,8 @@ class Recipe < ApplicationRecord
   has_many :comments 
   has_many :commented_users, through: :comments, source: :user
 
-    
+  validates :name, :ingredients, :instructions, presence: true
+
 
 
 end

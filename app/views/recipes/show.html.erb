@@ -14,16 +14,15 @@
 <% if @recipe.user_id == current_user.id%>
     <%= link_to "Edit Recipe", edit_recipe_path%> |
     <%= link_to "Delete", recipe_path(@recipe), method: :delete, data: {confirm: "Are you sure?" } %>
-<% end %><br><br>
+<% end %><br>
 
+<%= link_to "See all comments", recipe_comments_path(@recipe)%><br><br>
 
 <h6>Comments</h6>
 <%= form_for ([@recipe, @comment]) do |f| %>
     <%= f.text_field :content, class: "commentBox", style: "width: 35%", placeholder:"add a comment" %>
     <%= f.submit "Post Comment"%>
 <% end %>
-
-
 
 
 <%if !@recipe.comments.empty?%>

@@ -24,6 +24,6 @@
     </div>
 
     <%current_user.recipes.each do |recipe|%>
-        <%= link_to recipe.name, recipe_path(recipe)%> <br>
+        <p><%= link_to recipe.name, recipe_path(recipe)%> </p>
     <%end%> 
 <%end%>

@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
             flash[:notice]= "Recipe successfully saved"
             redirect_to '/my_recipes'
         else
+            flash.now[:alert] = @recipe.errors.full_messages[0]          
             render 'new'       
         end  
     end
@@ -33,7 +34,7 @@ class RecipesController < ApplicationController
         if @recipe
             @comment = Comment.new
 
-            @comments = @recipe.comments.order("created_at DESC")
+            @comments = @recipe.comments.order("created_at ASC")
         
             # binding.pry
         end
