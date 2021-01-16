@@ -28,6 +28,7 @@ gem 'devise'
 gem 'devise-bootstrap-views'
 
 gem "font-awesome-rails"
+gem 'jquery-rails', '~> 4.4'
 
 # gem 'bootstrap', '~> 4.0'
 # gem "bootstrap_form", ">= 4.0.0.alpha1"

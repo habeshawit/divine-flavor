@@ -1,0 +1,7 @@
+<h6>Comments</h6>
+<%= form_for ([@recipe, @comment]) do |f| %>
+    <div class="field <%= ' field_with_errors' if @comment.errors[:content].any? %>">
+        <%= f.text_field :content, class: "commentBox", style: "width: 35%", placeholder:"add a comment" %>
+        <%= f.submit "Post Comment"%>
+    </div>
+<% end %>
