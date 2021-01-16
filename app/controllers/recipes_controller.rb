@@ -42,7 +42,6 @@ class RecipesController < ApplicationController
 
             @comments = @recipe.comments.order("created_at ASC")
         
-            # binding.pry
         end
         
     end
@@ -90,7 +89,7 @@ class RecipesController < ApplicationController
     private
  
     def recipe_params
-      params.require(:recipe).permit(:name, :ingredients, :instructions, :user_id)
+      params.require(:recipe).permit(:name, :description,  :user_id, ingredients_attributes:[:id, :content, :_destroy], steps_attributes:[:id, :instructions, :_destroy])
     end
 
     def find_recipe

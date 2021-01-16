@@ -1,0 +1,9 @@
+# _task.html.erb
+<tr>
+  <td>
+    <%= f.text_field :_destroy, as: :hidden %>
+    <%= link_to 'Delete', '#', class: 'remove_record' %>
+  </td>
+  <td><%= f.submit :instructions, label: false %></td>
+
+</tr>

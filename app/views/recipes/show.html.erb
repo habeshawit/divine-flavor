@@ -1,14 +1,18 @@
 
 <h1><%=@recipe.name%></h1>
-<h6>Ingredients:</h6>
-<%@recipe.ingredients.split("\r\n").each do |ingredient|%>
-    <%= ingredient%><br>
-<%end%><br>
+Description:<h6><%=@recipe.description%><br><br>
+Ingredients: <ul>
+<%@recipe.ingredients.each do |i|%>
+    <li><%= i.content%></li>
+<%end%>
+</ul>
 
-<h6>Instructions:</h6>
-<%@recipe.instructions.split("\r\n").each do |step|%>
-    <%= step%><br>
-<%end%><br>
+Instructions:
+<ol>
+<%@recipe.steps.each do |step|%>
+    <li><%= step.instructions%></li>
+<%end%>
+</ol>
 
 
 <% if @recipe.user_id == current_user.id%>
