@@ -2,7 +2,7 @@ recipes#index
 
 <div class='search-area'>
     <h3>Search All Recipes</h3>
-    <%=form_tag '/search_all_recipes', method: :get do%>
+    <%=form_tag '/recipes', method: :get do%>
         <div class="form-group row">
             <div class ="col-sm-9 no-right-padding" >
                 <%= text_field_tag :recipe, params[:recipe], placeholder: "Enter a recipe name or ingredient", autofocus:true, class: "form-control form-control-lg"%>
@@ -17,6 +17,22 @@ recipes#index
     <%end%>
 </div>
 
-<% Recipe.all.each do |recipe|%>
-    <p><%= link_to recipe.name, recipe_path(recipe)%></p>
+ <!--<%=form_tag '/recipes', method: :get do%>
+        
+                <%= text_field_tag :recipe, params[:recipe], placeholder: "Enter a category"%>
+            
+
+            
+                <%= button_tag "filter"%>
+          
+    <%end%><br><br>-->
+
+
+<% @recipes.each do |recipe|%>
+    <p><%= link_to recipe.name, recipe_path(recipe)%> 
+        <%if recipe.user != current_user%>
+            <%= link_to "Add to my recipes", comments_path(user: current_user, recipe: @recipe), class: "btn btn-success"%>
+        <%end%>
+    </p>
+    
 <%end%>

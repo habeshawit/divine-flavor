@@ -8,7 +8,7 @@
 <%else%>
     <div class='search-area'>
         <h3>Search your recipes</h3>
-        <%=form_tag '/search_my_recipes', method: :get do%>
+        <%=form_tag '/my_recipes', method: :get do%>
             <div class="form-group row">
                 <div class ="col-sm-9 no-right-padding" >
                     <%= text_field_tag :recipe, params[:recipe], placeholder: "Enter a recipe name or ingredient", autofocus:true, class: "form-control form-control-lg"%>
@@ -23,7 +23,27 @@
         <%end%>
     </div>
 
-    <%current_user.recipes.each do |recipe|%>
-        <p><%= link_to recipe.name, recipe_path(recipe)%> </p>
-    <%end%> 
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Recipe Name</th>
+      <th scope="col">View</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%@recipes.each do |recipe|%>
+    <tr>
+    <td><%= recipe.name %></td>
+      <td><%= link_to "View", recipe_path(recipe)%></td>
+      <td><%= link_to "Edit", edit_recipe_path(recipe)%></td>
+      <td><%= link_to "Delete", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{recipe.name}?" }%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+
 <%end%>
+
+

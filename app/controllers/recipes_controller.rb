@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
     before_action :find_recipe, only: [:show, :edit, :update, :destroy]
 
+
     def new 
         @recipe = Recipe.new
     end
@@ -25,8 +26,13 @@ class RecipesController < ApplicationController
 
     def update
         @recipe = Recipe.all.find_by(id: params[:id])
-        @recipe.update(recipe_params)
-        redirect_to recipe_path(@recipe)
+        if @recipe.update(recipe_params)
+            flash[:notice]= "Recipe successfully updated"
+            redirect_to recipe_path(@recipe)
+        else
+            flash[:alert] = @recipe.errors.full_messages[0]
+            redirect_to edit_recipe_path(@recipe)
+        end
     end
 
     def show
@@ -41,32 +47,39 @@ class RecipesController < ApplicationController
         
     end
     
-    def search_my_recipes
-        @recipes = current_user.recipes.all.select { |recipe|  recipe.name.downcase.include?(params[:recipe].downcase) || recipe.ingredients.downcase.include?(params[:recipe].downcase)}         # @recipes = current_user.recipes.where('lower(name) = ?' LIKE params[:recipe].downcase)
-        # binding.pry
-        if @recipes.empty?
-            
-            flash[:alert] = "No matching recipes found"
-            redirect_to '/my_recipes'
-        else
-            render :'recipes/search'
+    def index
+        @recipes = Recipe.all
+        if params[:recipe]
+            @recipes = @recipes.search(params[:recipe])
+            if !@recipes
+            #   @recipes = []
+              flash[:alert] = "No matching recipes found"
+              redirect_to '/recipes'
+            end
         end
     end
 
-    def search_all_recipes
-        @recipes = Recipe.all.select { |recipe|  recipe.name.downcase.include?(params[:recipe].downcase) || recipe.ingredients.downcase.include?(params[:recipe].downcase)} 
-        if @recipes.empty?
-            flash[:alert] = "No matching recipes found"
-            redirect_to '/recipes'
+    def add_recipe(params)
+        @recipe = current_user.recipes.build(params)
+       
+        # binding.pry
+        if @recipe.save
+            # binding.pry
+            flash[:notice]= "Recipe successfully saved"
+            redirect_to '/my_recipes'
         else
-            render :'recipes/search'
+            flash.now[:alert] = @recipe.errors.full_messages[0]          
+            render 'new'       
         end
+
     end
+    
+
 
     def destroy
         if @recipe.destroy
             flash[:notice]= "Recipe successfully deleted"
-            redirect_to root_path
+            redirect_to '/my_recipes'
           else
             flash[:alert] = @recipe.errors.full_messages
             render 'show'

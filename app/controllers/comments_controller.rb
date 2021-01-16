@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
       if @comment.save
         redirect_to @recipe
       else
-        flash[:alert] = @comment.errors.full_messages
+        flash[:alert] = @comment.errors.full_messages[0]
         redirect_to recipe_path(@recipe)
       end
     end
