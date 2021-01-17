@@ -20,8 +20,8 @@ class Recipe < ApplicationRecord
   
 
   def self.search(params)
-      # @recipes = self.all.select { |recipe|  recipe.name.downcase.include?(params.downcase) || recipe.ingredients.downcase.include?(params.downcase)}         # @recipes = current_user.recipes.where('lower(name) = ?' LIKE params[:recipe].downcase)
-      @recipes = where("LOWER(name) LIKE :term OR LOWER(description) LIKE :term", term: "%#{params.downcase}%")
+      # @recipes = self.all.select { |recipe|  recipe.name.downcase.include?(params.downcase) || recipe.ingredients.downcase.include?(params.downcase)}          
+      @recipes = where("LOWER(name) LIKE :term OR LOWER(description) LIKE :term", term: "%#{params.downcase}%") 
       if !@recipes.empty?
           return @recipes
       end

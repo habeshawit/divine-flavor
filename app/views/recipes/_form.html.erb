@@ -22,7 +22,7 @@
     </div>
   </div><br>
 
-  <%= f.label :instructions%>
+  <%= f.label :instructions%>  
   <div id='steps'>
     <%= f.fields_for :steps do |step| %>
       <%= render 'step_fields', :f => step %>

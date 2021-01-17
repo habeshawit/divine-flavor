@@ -1,13 +1,17 @@
 
 <h1><%=@recipe.name%></h1>
-Description:<h6><%=@recipe.description%><br><br>
-Ingredients: <ul>
-<%@recipe.ingredients.each do |i|%>
-    <li><%= i.content%></li>
-<%end%>
-</ul>
+<strong>Description:</strong>
+<p><%=@recipe.description%></p>
 
-Instructions:
+<strong>Ingredients:</strong>
+<ul>
+  <%@recipe.ingredients.each do |i|%>
+    <li><%= i.quantity%> <%= i.name%></li> </td>
+    <%end%>
+    </ul>
+
+
+<strong>Instructions:</strong>
 <ol>
 <%@recipe.steps.each do |step|%>
     <li><%= step.instructions%></li>

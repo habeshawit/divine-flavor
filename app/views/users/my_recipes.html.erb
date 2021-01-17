@@ -27,7 +27,6 @@
   <thead>
     <tr>
       <th scope="col">Recipe Name</th>
-      <th scope="col">View</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
@@ -35,8 +34,7 @@
   <tbody>
   <%@recipes.each do |recipe|%>
     <tr>
-    <td><%= recipe.name %></td>
-      <td><%= link_to "View", recipe_path(recipe)%></td>
+      <td><%= link_to recipe.name, recipe_path(recipe)%></td>
       <td><%= link_to "Edit", edit_recipe_path(recipe)%></td>
       <td><%= link_to "Delete", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{recipe.name}?" }%></td>
     </tr>
