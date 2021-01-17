@@ -86,10 +86,16 @@ class RecipesController < ApplicationController
         # redirect_to '/my_recipes'
     end 
 
+    def delete_image_attachment
+        @image = ActiveStorage::Blob.find_signed(params[:id])
+        @image.attachments.first.purge
+        redirect_back(fallback_location: recipes_path)
+      end
+
     private
  
     def recipe_params
-      params.require(:recipe).permit(:name, :description,  :user_id, ingredients_attributes:[:id, :name, :quantity, :_destroy], steps_attributes:[:id, :instructions, :_destroy])
+      params.require(:recipe).permit(:name, :description, :user_id, images: [], ingredients_attributes:[:id, :name, :quantity, :_destroy], steps_attributes:[:id, :instructions, :_destroy])
     end
 
     def find_recipe

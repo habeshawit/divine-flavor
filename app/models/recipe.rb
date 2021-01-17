@@ -14,6 +14,7 @@ class Recipe < ApplicationRecord
 
   scope :most_commented, -> {left_joins(:comments).group('recipes.id').order('count(recipes.id) desc')}
 
+  has_many_attached :images
   # def ingredient_attributes(attr)
   #   self.ingredients = Ingredient.find_or_create_by(attr) if !attr[:name].blank?
   # end

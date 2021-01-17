@@ -22,3 +22,26 @@
     color: #212529;
     line-height: 30px;
 }
+
+.remove_link_colour {
+    a, a:hover, a:focus, a:active {
+        color: inherit;
+        text-decoration: none;
+    }
+  }
+
+  #image_wrap {
+    /* dimensions */
+    width:700px;
+    padding:15px 0;
+ 
+    /* centered */
+    text-align:center;
+ 
+    /* some "skinning" */
+    background-color:#efefef;
+    border:2px solid #fff;
+    outline:1px solid #ddd;
+    -moz-ouline-radius:4px;
+}
+

@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
     before_action :find_recipe, except: [:index, :user_comments, :all_comments]
     before_action :authenticate_user!
+    before_action :find_comment, only: [:destroy]
   
     def new
         @comment = Comment.new
@@ -36,6 +37,15 @@ class CommentsController < ApplicationController
       end
     end
   
+    def destroy
+      if @comment.destroy
+          flash[:notice]= "Comment successfully deleted"
+        else
+          flash[:alert] = @comment.errors.full_messages
+        end
+      redirect_to @recipe
+    end 
+
     private
   
     def comment_params
@@ -44,5 +54,9 @@ class CommentsController < ApplicationController
   
     def find_recipe
       @recipe = Recipe.find(params[:recipe_id])
+    end
+
+    def find_comment
+      @comment = Comment.find(params[:id])
     end
 end

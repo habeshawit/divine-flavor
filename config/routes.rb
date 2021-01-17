@@ -4,8 +4,11 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :recipes do
-    resources :comments, only: [:new, :create, :index]
+    resources :comments, only: [:new, :create, :index, :destroy]
+    member do
+      delete :delete_image_attachment
     end
+  end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do 
     resources :recipes, only: [:new, :create, :index]
@@ -19,6 +22,9 @@ Rails.application.routes.draw do
   devise_scope :user do get '/logout' => 'devise/sessions#destroy' end
 
   get '/add_recipe' => 'recipes#add_recipe'
+  # delete '/delete_comment' => 'comments#destroy'
+
+
 
   
 
