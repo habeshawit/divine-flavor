@@ -10,7 +10,7 @@ class Recipe < ApplicationRecord
   has_many :comments 
   has_many :commented_users, through: :comments, source: :user
 
-  validates :name, presence: true
+  validates :name, :ingredients, :steps, presence: true
 
   scope :most_commented, -> {left_joins(:comments).group('recipes.id').order('count(recipes.id) desc')}
 

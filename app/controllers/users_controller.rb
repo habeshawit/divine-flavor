@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  # def my_recipes
-  #   @recipes = current_user.recipes.all
-  #   if params[:recipe]
-  #           @recipes = @recipes.search(params[:recipe])
-  #       end
-  # end
+
 
   def my_recipes
     @recipes = current_user.recipes.all
@@ -17,4 +12,5 @@ class UsersController < ApplicationController
       end
   end
   end
+
 end

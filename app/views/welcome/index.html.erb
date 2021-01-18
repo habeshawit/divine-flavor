@@ -5,9 +5,8 @@
 <br><%= link_to "Sign In ", new_user_session_path %> Or <%= link_to "Sign Up", new_user_registration_path %><br>
 <% else %>
 <h1>Hi, <%=current_user.name%></h1>
-<%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-<%= link_to "Logout", destroy_user_session_path, method: :delete %><br>
-<% Recipe.all.each do |recipe|%>
-    <br><%=link_to recipe.name, recipe_path(recipe)%>
-<%end%>
+<%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+
 <% end %>
+<%= link_to "profile", user_path(current_user)%>
+<%= link_to "my recipes", user_recipes_path(current_user)%>

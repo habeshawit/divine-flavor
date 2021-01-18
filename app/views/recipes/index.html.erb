@@ -1,5 +1,4 @@
-recipes#index
-
+<h1>Recipes</h1>
 <div class='search-area'>
     <h3>Search All Recipes</h3>
     <%=form_tag '/recipes', method: :get do%>
@@ -17,22 +16,4 @@ recipes#index
     <%end%>
 </div>
 
- <!--<%=form_tag '/recipes', method: :get do%>
-        
-                <%= text_field_tag :recipe, params[:recipe], placeholder: "Enter a category"%>
-            
-
-            
-                <%= button_tag "filter"%>
-          
-    <%end%><br><br>-->
-
-
-<% @recipes.each do |recipe|%>
-    <p><%= link_to recipe.name, recipe_path(recipe)%> 
-        <%if recipe.user != current_user%>
-            <%= link_to "Add to my recipes", comments_path(user: current_user, recipe: @recipe), class: "btn btn-success"%>
-        <%end%>
-    </p>
-    
-<%end%>
+<%= render '/recipes/home'%>

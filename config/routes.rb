@@ -10,9 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do 
-    resources :recipes, only: [:new, :create, :index]
-  end
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } 
   root 'welcome#index'
 
   get '/my_recipes', to: 'users#my_recipes' #change to 'user/:id/recipes' <--create nested routes
@@ -23,6 +21,11 @@ Rails.application.routes.draw do
 
   get '/add_recipe' => 'recipes#add_recipe'
   # delete '/delete_comment' => 'comments#destroy'
+
+  resources :users do
+    resources :recipes, only: [:new, :create, :index]
+  end
+
 
 
 
