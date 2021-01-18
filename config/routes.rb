@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :user_recipes, only: [:new, :create, :index, :destroy]
   resources :comments
 
   resources :categories
@@ -13,14 +14,13 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } 
   root 'welcome#index'
 
-  get '/my_recipes', to: 'users#my_recipes' #change to 'user/:id/recipes' <--create nested routes
-  # get '/search_my_recipes', to: 'recipes#search_my_recipes'
-  # get '/search_all_recipes', to: 'recipes#search_all_recipes'
+  get '/my_recipes', to: 'users#my_recipes'
   get '/delete_recipe', to: 'recipes#destroy'
   devise_scope :user do get '/logout' => 'devise/sessions#destroy' end
 
   get '/add_recipe' => 'recipes#add_recipe'
-  # delete '/delete_comment' => 'comments#destroy'
+  get '/my_favorites' => 'user_recipes#index'
+  
 
   resources :users do
     resources :recipes, only: [:new, :create, :index]

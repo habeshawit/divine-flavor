@@ -5,19 +5,21 @@
      
       <%if recipe.images.attached?%>
         <%= link_to (image_tag recipe.images.first, class: "recipe-index"), recipe%>
-        <ul>
-        <li><%= recipe.name%></li>
-        <li><%= recipe.description%></li>    
       <%else%>
       <%= link_to (image_tag 'default_img.jpg', class: "recipe-index"), recipe%>
-        <ul>
-        <li><%= link_to recipe.name, recipe%></li>
       <%end%>
+      <ul>
+        <li><%= recipe.name%></li>
+        <li><%= recipe.description%></li>    
+      
       <%if recipe.user == current_user%>
         <%= link_to "Edit", edit_recipe_path(recipe)%> |
         <%= link_to "Delete", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{recipe.name}?" }%></li> 
+      <%elsif !current_user.added_recipes.include?(recipe)%>
+        <%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: recipe), class: "btn btn-success", method: :post%>
       <%else%>
-        <%= link_to "Add to my recipes", comments_path(user: current_user, recipe: @recipe), class: "btn btn-success"%>
+        <%= link_to "Remove from favorites", user_recipe_path(recipe), class: "btn btn-success", method: :delete, data: {confirm: "Are you sure you want to remove #{recipe.name}?" }%></li> 
+
       <%end%>
       </ul>
         </div>

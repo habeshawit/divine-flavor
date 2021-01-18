@@ -33,7 +33,7 @@
   </div><br>
 
 <div class="form-group <%= ' field_with_errors' if @recipe.errors[:images].any? %>">
-    <%= f.label :upload_an_image %> <br> 
+    <%= f.label :upload_images %> <br> 
     <%if @recipe.images.attached?%>
     <% @recipe.images.each do |image| %>
       <%= image_tag image.variant(resize_to_limit: [100, 100])  %>

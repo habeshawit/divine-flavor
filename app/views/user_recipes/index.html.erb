@@ -1,0 +1,7 @@
+<br>
+<h1>Your Favorite Recipes</h1>
+<%if @recipes.empty?%>
+    Looks like you haven't added any favorite recipes
+<%else%>
+    <%=render '/recipes/home'%>
+<%end%>

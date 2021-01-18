@@ -76,6 +76,7 @@ class RecipesController < ApplicationController
 
 
     def destroy
+        # binding.pry
         if @recipe.destroy
             flash[:notice]= "Recipe successfully deleted"
             redirect_to '/my_recipes'

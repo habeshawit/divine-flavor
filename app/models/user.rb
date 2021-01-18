@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :recipes
-  has_many :comments
+  has_many :comments, :dependent => :destroy
   has_many :commented_recipes, through: :comments, source: :recipe
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
+  has_many :user_recipes, :dependent => :destroy
+  has_many :added_recipes, through: :user_recipes, source: :recipe 
 
   def self.new_with_session(params, session)
     super.tap do |user|
