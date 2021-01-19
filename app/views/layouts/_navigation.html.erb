@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="/">DivineFlavor</a>
+<div class="container">
+    <a class="navbar-brand" id="logo" href="/" >Divine Flavor </a>
     <%if current_user%>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,18 +30,23 @@
             </div>
           </li>
         </ul>
-      <ul class="navbar-nav ml-auto">
+      <ul class='navbar-nav ml-auto name_and_log'>
+          <li class="nav-item user-name">
+            <%=fa_icon 'user'%>  <%= link_to current_user.name, current_user, class: 'remove_link_colour'%>
+          </li>
+      </ul>
+      <ul class="navbar-nav ml-auto name_and_log">
         <li class='nav-item'>
           <%= link_to("Logout",destroy_user_session_path,
           class: "btn btn-danger", method: :delete)%>
         </li>
-      <ul>
+      <ul class="search-bar">
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-          
+      </ul>
       </div>
   <%end%>
-    </div>
+</div>
 </nav>

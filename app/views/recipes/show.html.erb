@@ -1,17 +1,29 @@
 
-<h1><%=@recipe.name%></h1>
+<h1 style="color:red"><%=@recipe.name%></h1>
+
+      <% if @recipe.user_id == current_user.id%>
+        <%= link_to "Edit Recipe", edit_recipe_path%> |
+        <%= link_to "Delete", recipe_path(@recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{@recipe.name}?" } %>
+
+      <%elsif !current_user.added_recipes.include?(@recipe)%>
+      by <%= link_to "#{@recipe.user.name}", user_path(@recipe.user)%> |
+        <%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: @recipe), method: :post%>
+      <%else%>
+      by <%= link_to "#{@recipe.user.name}", user_path(@recipe.user)%> |
+        <%= link_to "Remove from favorites", user_recipe_path(@recipe),  method: :delete, data: {confirm: "Are you sure you want to remove #{@recipe.name}?" }%></li> 
+
+      <%end%><br><br>
+    
 
 <%if @recipe.images.attached?%>
 
     <%= image_tag  @recipe.images.first.variant(resize_to_limit: [300, 300])  %>
 
-<%end%><br>
-    
-
-<strong>Description:</strong>
+<%end%><br><br>
+<strong style="color:red">Description:</strong>
 <p><%=@recipe.description%></p>
 
-<strong>Ingredients:</strong>
+<strong style="color:red">Ingredients:</strong>
 <ul>
   <%@recipe.ingredients.each do |i|%>
     <li><%= i.quantity%> <%= i.name%></li> </td>
@@ -19,7 +31,7 @@
     </ul>
 
 
-<strong>Instructions:</strong>
+<strong style="color:red">Instructions:</strong>
 <ol>
 <%@recipe.steps.each do |step|%>
     <li><%= step.instructions%></li>
@@ -27,17 +39,13 @@
 </ol>
 
 <%if @recipe.images.attached?%>
-<strong>Gallery:</strong><br>
+<strong style="color:red">Gallery:</strong><br>
   <% @recipe.images.each do |image| %>
     <%= link_to image_tag(image.variant(resize: "100x100")), image.variant(resize: "800x800") %>
   <% end %>
 <%end%><br>
     
 
-<% if @recipe.user_id == current_user.id%>
-    <%= link_to "Edit Recipe", edit_recipe_path%> |
-    <%= link_to "Delete", recipe_path(@recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{@recipe.name}?" } %>
-<% end %><br>
 
 <%= render '/comments/form' %>
 

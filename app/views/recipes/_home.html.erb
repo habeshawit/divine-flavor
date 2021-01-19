@@ -1,6 +1,6 @@
 <div class="row">
   <%@recipes.each do |recipe|%>
-    <div class = "col-md-4">
+    <div class = "col-sm-4">
      <div class="recipe-box">
      
       <%if recipe.images.attached?%>
@@ -8,6 +8,7 @@
       <%else%>
       <%= link_to (image_tag 'default_img.jpg', class: "recipe-index"), recipe%>
       <%end%>
+      <p><%= "Your Recipe" if recipe.user == current_user%></p>
       <ul>
         <li><%= recipe.name%></li>
         <li><%= recipe.description%></li>    
@@ -16,9 +17,9 @@
         <%= link_to "Edit", edit_recipe_path(recipe)%> |
         <%= link_to "Delete", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{recipe.name}?" }%></li> 
       <%elsif !current_user.added_recipes.include?(recipe)%>
-        <%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: recipe), class: "btn btn-success", method: :post%>
+        <%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: recipe), method: :post%>
       <%else%>
-        <%= link_to "Remove from favorites", user_recipe_path(recipe), class: "btn btn-success", method: :delete, data: {confirm: "Are you sure you want to remove #{recipe.name}?" }%></li> 
+        <%= link_to "Remove from favorites", user_recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to remove #{recipe.name}?" }%></li> 
 
       <%end%>
       </ul>
