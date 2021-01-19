@@ -1,0 +1,12 @@
+
+        <div class="form-group row">
+            <div class ="col-sm-4 no-right-padding" >
+                <%= text_field_tag :recipe, params[:recipe], placeholder: "Search for a recipe", autofocus:true, class: "form-control form-control-sm"%>
+            </div>
+
+            <div class="col-sm-1 no-left-padding" >
+                <%= button_tag type: :submit, class: "btn btn-info search-button" do%>
+                    <%= fa_icon 'search' %>
+                <%end%> 
+            </div>
+        </div>

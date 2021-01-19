@@ -13,7 +13,19 @@ class UsersController < ApplicationController
   end
   end
 
-  def show 
+  def show
+    @user = User.find(params[:id])
+    # binding.pry 
+  end
+
+  def destroy
+    if current_user.destroy
+      flash[:notice]= "Account successfully deleted"
+      redirect_to root_path
+    else
+      flash[:alert] = current_user.errors.full_messages
+      render 'show'
+    end
   end
 
 end

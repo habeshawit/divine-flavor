@@ -1,0 +1,41 @@
+<%if @user == current_user%>
+    <h1>Your Profile</h1>
+
+    <strong style="color:green">Username: </strong><%=current_user.name%><br>
+    <strong style="color:green">Email: </strong><%=current_user.email%><br>
+    <strong style="color:green">Number of Recipes Created: </strong><%=current_user.recipes.count%><br>
+    <strong style="color:green">Number of Recipes Saved to Favorites: </strong><%=current_user.added_recipes.count%> <br><br>
+
+
+    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> | <%= link_to "Delete Account", user_path(current_user), method: :delete, data: {confirm: "Are you sure you want to delete your account?" } %>
+<%else%>
+    <h1><%="#{@user.name}'s Profile"%></h1>
+    <strong style="color:green">Number of Recipes Created: </strong><%=@user.recipes.count%><br><br>
+    <h4><%="#{@user.name}'s Recipes"%></h4>
+    <div class="row">
+    <% @user.recipes.each do |recipe|%>
+        <div class = "col-sm-3">
+            <div class="recipe-box">
+            
+            <%if recipe.images.attached?%>
+                <%= link_to (image_tag recipe.images.first, class: "recipe-index"), recipe%>
+            <%else%>
+                <%= link_to (image_tag 'default_img.jpg', class: "recipe-index"), recipe%>
+            <%end%>
+            
+            <ul>
+                <li><%= recipe.name%></li>
+                <li><%= recipe.description%></li>    
+
+                <%if !current_user.added_recipes.include?(recipe)%>
+                    <i class="fa fa-heart" aria-hidden="true"><%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: recipe), method: :post%></i>
+                <%else%>
+                    <%= link_to "Remove from favorites", user_recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to remove #{recipe.name}?" }%></li> 
+
+                <%end%>
+            </ul>
+            </div>
+        </div>
+    <%end%>
+    </div>
+<%end%>     

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :recipes
+  has_many :recipes, dependent: :destroy
   has_many :comments, :dependent => :destroy
   has_many :commented_recipes, through: :comments, source: :recipe
   # Include default devise modules. Others available are:
@@ -8,7 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   devise :omniauthable, :omniauth_providers => [:facebook]
-
+  
   has_many :user_recipes, :dependent => :destroy
   has_many :added_recipes, through: :user_recipes, source: :recipe 
 

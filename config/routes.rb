@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   get '/add_recipe' => 'recipes#add_recipe'
   get '/my_favorites' => 'user_recipes#index'
-  
+  # get '/my_profile' => 'users#show'
 
   resources :users do
     resources :recipes, only: [:new, :create, :index]

@@ -10,7 +10,7 @@
         <%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: @recipe), method: :post%>
       <%else%>
       by <%= link_to "#{@recipe.user.name}", user_path(@recipe.user)%> |
-        <%= link_to "Remove from favorites", user_recipe_path(@recipe),  method: :delete, data: {confirm: "Are you sure you want to remove #{@recipe.name}?" }%></li> 
+        <%= link_to "Remove from favorites", user_recipe_path(@recipe),  method: :delete, data: {confirm: "Are you sure you want to remove #{@recipe.name} from favorites?" }%></li> 
 
       <%end%><br><br>
     

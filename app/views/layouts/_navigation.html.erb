@@ -18,17 +18,7 @@
           <li class="nav-item <%= 'active' if request.path == my_favorites_path%>">
             <a class="nav-link" href="/my_favorites">Favorites</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
+          
         </ul>
       <ul class='navbar-nav ml-auto name_and_log'>
           <li class="nav-item user-name">
@@ -38,14 +28,9 @@
       <ul class="navbar-nav ml-auto name_and_log">
         <li class='nav-item'>
           <%= link_to("Logout",destroy_user_session_path,
-          class: "btn btn-danger", method: :delete)%>
+          class: "btn btn-info", method: :delete)%>
         </li>
-      <ul class="search-bar">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </ul>
+      
       </div>
   <%end%>
 </div>
