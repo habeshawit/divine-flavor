@@ -1,41 +1,55 @@
 <%if @user == current_user%>
     <h1>Your Profile</h1>
-
-    <strong style="color:green">Username: </strong><%=current_user.name%><br>
-    <strong style="color:green">Email: </strong><%=current_user.email%><br>
-    <strong style="color:green">Number of Recipes Created: </strong><%=current_user.recipes.count%><br>
-    <strong style="color:green">Number of Recipes Saved to Favorites: </strong><%=current_user.added_recipes.count%> <br><br>
-
-
-    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> | <%= link_to "Delete Account", user_path(current_user), method: :delete, data: {confirm: "Are you sure you want to delete your account?" } %>
-<%else%>
-    <h1><%="#{@user.name}'s Profile"%></h1>
-    <strong style="color:green">Number of Recipes Created: </strong><%=@user.recipes.count%><br><br>
-    <h4><%="#{@user.name}'s Recipes"%></h4>
-    <div class="row">
-    <% @user.recipes.each do |recipe|%>
-        <div class = "col-sm-3">
-            <div class="recipe-box">
-            
-            <%if recipe.images.attached?%>
-                <%= link_to (image_tag recipe.images.first, class: "recipe-index"), recipe%>
-            <%else%>
-                <%= link_to (image_tag 'default_img.jpg', class: "recipe-index"), recipe%>
-            <%end%>
-            
-            <ul>
-                <li><%= recipe.name%></li>
-                <li><%= recipe.description%></li>    
-
-                <%if !current_user.added_recipes.include?(recipe)%>
-                    <i class="fa fa-heart" aria-hidden="true"><%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: recipe), method: :post%></i>
+    <div class="container">
+        <div class="row">
+          <%if current_user.image%><img src="<%=current_user.image%>" width="220" height="220"><%end%>
+            <div class="col">
+                <strong>Username: </strong><%=current_user.name%><br>
+                <strong>Email: </strong><%=current_user.email%><br>
+                <strong>Number of Recipes Created: </strong><%=current_user.recipes.count%><br>
+                <strong>Number of Recipes Saved to Favorites: </strong><%=current_user.added_recipes.count%> <br>
+                <%if current_user.bio%>
+                    <strong>About Me: </strong><%=current_user.bio%> <br>
+                    <%=link_to "Edit my Bio", edit_user_path(current_user)%>
                 <%else%>
-                    <%= link_to "Remove from favorites", user_recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to remove #{recipe.name}?" }%></li> 
+                    <%=link_to "Add Bio", edit_user_path(current_user)%>
 
                 <%end%>
-            </ul>
             </div>
         </div>
-    <%end%>
-    </div>
+    </div><br>
+
+    <%= link_to 'Edit Account Profile', edit_user_registration_path, :class => 'navbar-link' %> | <%= link_to "Delete Account", user_path(current_user), method: :delete, data: {confirm: "Are you sure you want to delete your account?" } %>
+<%else%>
+    <h1><%="#{@user.name}'s Profile"%></h1>
+     <div class="container">
+        <div class="row">
+        
+          <%if @user.image%><img src="<%=@user.image%>" width="220" height="220"><%end%>
+            <div class="col">
+                <strong>Number of Recipes Created: </strong><%=@user.recipes.count%><br>
+                <strong>Number of Recipes Saved to Favorites: </strong><%=@user.added_recipes.count%> <br>
+                <%if @user.bio%>
+                    <strong>About Me: </strong><%=@user.bio%> <br>
+                <%end%><br>
+                <i class="fa fa-user-plus"> <em><strong><%=link_to "Add Friend"%></strong></em></i>
+            </div>
+        </div>
+    </div><br>
+
+    <h4>Recipes:</h4>
+
+    <% @user.recipes.each do |recipe|%>
+        <strong><%= link_to recipe.name, recipe%></strong> - <%=recipe.description%><br>
+    <%end%><br>
+
+
+    <h4><%if !@user.added_recipes.empty?%>
+    <h4>Favorites:</h4>
+        <% @user.added_recipes.each do |recipe|%>
+            <strong><%= link_to recipe.name, recipe%></strong> - <%=recipe.description%><br>
+        <%end%>   
+    <%end%><br>
+    
+    <h4>Friends:</h4>
 <%end%>     

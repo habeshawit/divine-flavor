@@ -1,0 +1,16 @@
+<h1></h1>
+<%= form_for current_user do |f| %>  
+
+  <div class="form-group <%= 'field_with_errors' if current_user.errors[:bio].any? %>">
+  
+    <%= f.label :bio %>
+    <%= f.text_area :bio, :class=>"form-control", placeholder:"Write a short bio"%>
+  </div>
+  
+    <%= f.button "Submit", :class=>"btn btn-success"%>  <button type="button" class="btn btn-success remove_link_colour" color="inherit"><%= link_to "Cancel", my_recipes_path%></button>
+
+  <% end %>
+  
+
+
+  </div>

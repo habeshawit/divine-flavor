@@ -18,6 +18,19 @@ class UsersController < ApplicationController
     # binding.pry 
   end
 
+  def edit
+  end
+
+  def update
+        if current_user.update(user_params)
+            flash[:notice]= "Bio successfully updated"
+            redirect_to user_path(current_user)
+        else
+            flash[:alert] = current_user.errors.full_messages[0]
+            redirect_to user_path(current_user)
+        end
+  end
+
   def destroy
     if current_user.destroy
       flash[:notice]= "Account successfully deleted"
@@ -27,5 +40,8 @@ class UsersController < ApplicationController
       render 'show'
     end
   end
-
+  
+  def user_params
+    params.require(:user).permit(:bio)
+    end
 end
