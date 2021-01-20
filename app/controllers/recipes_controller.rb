@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
     before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
 
 
     def new 
@@ -96,7 +97,7 @@ class RecipesController < ApplicationController
     private
  
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :user_id, images: [], ingredients_attributes:[:id, :name, :quantity, :_destroy], steps_attributes:[:id, :instructions, :_destroy])
+      params.require(:recipe).permit(:name, :description, :prep_time, :cook_time, :category_name, :user_id, images: [], ingredients_attributes:[:id, :name, :quantity, :_destroy], steps_attributes:[:id, :instructions, :_destroy])
     end
 
     def find_recipe

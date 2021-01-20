@@ -1,0 +1,7 @@
+<h1><%= @category.name%> Recipes </h1>
+<%@recipes = @category.recipes%>
+<%if !@recipes.empty?%>
+    <%= render '/recipes/home'%>
+<%else%>
+    Looks like there are no recipes in this category
+<%end%>

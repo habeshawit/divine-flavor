@@ -33,6 +33,7 @@ gem 'jquery-ui-rails'
 gem 'simple_form'
 gem "cocoon"
 
+gem 'awesome_print'
 # gem 'bootstrap', '~> 4.0'
 # gem "bootstrap_form", ">= 4.0.0.alpha1"
 # gem 'devise' # gem 'devise-i18n'

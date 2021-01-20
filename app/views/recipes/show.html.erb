@@ -14,12 +14,14 @@
 
       <%end%><br><br>
     
-
 <%if @recipe.images.attached?%>
+    <%= image_tag  @recipe.images.first.variant(resize_to_limit: [300, 300])  %><br><br>
+<%end%>
 
-    <%= image_tag  @recipe.images.first.variant(resize_to_limit: [300, 300])  %>
+<strong style="color:red"> Category: </strong> <%=@recipe.category_name%> |
+<strong style="color:red">Prep Time:</strong> <%=@recipe.prep_time%> mins |
+<strong style="color:red">Cook Time:</strong> <%=@recipe.cook_time%>mins<br><br>
 
-<%end%><br><br>
 <strong style="color:red">Description:</strong>
 <p><%=@recipe.description%></p>
 
@@ -29,7 +31,6 @@
     <li><%= i.quantity%> <%= i.name%></li> </td>
     <%end%>
     </ul>
-
 
 <strong style="color:red">Instructions:</strong>
 <ol>

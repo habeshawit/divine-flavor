@@ -1,17 +1,38 @@
 <%= form_for @recipe do |f| %>  
 
-  <div class="form-group <%= ' field_with_errors' if @recipe.errors[:name].any? %>">
+  <div class="form-group <%= 'field_with_errors' if @recipe.errors[:name].any? %>">
   
     <%= f.label :name %>
     <%= f.text_field :name, :class=>"form-control", placeholder:"Give your recipe a name"%>
   </div>
 
-  <div class="form-group <%= ' field_with_errors' if @recipe.errors[:description].any? %>">
+
+<div class="form-group <%= 'field_with_errors' if @recipe.errors[:prep_time].any? %>">
+    <%= f.label :prep_time %>
+    <%= f.text_field :prep_time%> minutes
+  </div>
+
+<div class="form-group <%= 'field_with_errors' if @recipe.errors[:cook_time].any? %>">
+    <%= f.label :cook_time %>
+    <%= f.text_field :cook_time%> minutes
+  </div>
+
+  <div class="form-group <%= 'field_with_errors' if @recipe.errors[:description].any? %>">
     <%= f.label :description %>
     <%= f.text_area :description, :class=>"form-control", rows:"3", placeholder:"Add a description" %>
   </div>
 
+    <div class="form-group <%= 'field_with_errors' if @recipe.errors[:category].any? %>">
+    <%= f.label :category %><br>
+    <%= f.text_field :category_name, list: "categories_autocomplete" %>
+    <datalist id="categories_autocomplete">
+      <% Category.all.each do |category| %>
+        <option value="<%= category.name %>">
+      <% end %>
+    </datalist>
+  </div>
 
+<div class="form-group <%= 'field_with_errors' if @recipe.errors[:ingredient].any? %>">
 <%= f.label :ingredients%>
   <div id='ingredients'>
     <%= f.fields_for :ingredients do |ingredient| %>
@@ -20,8 +41,10 @@
     <div class='links'>
       <%= link_to_add_association 'add ingredient', f, :ingredients %>
     </div>
-  </div><br>
+  </div>
+</div>
 
+<div class="form-group <%= 'field_with_errors' if @recipe.errors[:instructions].any? %>">
   <%= f.label :instructions%>  
   <div id='steps'>
     <%= f.fields_for :steps do |step| %>
@@ -30,9 +53,10 @@
     <div class='links'>
       <%= link_to_add_association 'add step', f, :steps %>
     </div>
-  </div><br>
+  </div>
+</div>
 
-<div class="form-group <%= ' field_with_errors' if @recipe.errors[:images].any? %>">
+<div class="form-group <%= 'field_with_errors' if @recipe.errors[:images].any? %>">
     <%= f.label :upload_images %> <br> 
     <%if @recipe.images.attached?%>
     <% @recipe.images.each do |image| %>

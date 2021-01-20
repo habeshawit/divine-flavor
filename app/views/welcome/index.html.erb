@@ -21,26 +21,30 @@
     <br>
       <h3>Recipe of the Day</h3>
       <p>Try out this delicious recipe and make it your own!</p>
-      <p><%recipe = Recipe.order(Arel.sql('RANDOM()')).first%></p>
+      <p><%if recipe = Recipe.order(Arel.sql('RANDOM()')).first%></p>
       <strong><%=link_to recipe.name, recipe%></strong><br>
       <%if !recipe.images.empty?%>
         <%= link_to image_tag(recipe.images.first.variant(resize: "280x200")), recipe %>
       <%end%><br>
       <i class="fa fa-heart" style="color:red" aria-hidden="true"> </i> <%=recipe.description%> 
+      <%end%>
       </div>
+      
     <div class="col-sm-4">
     <br>
       <h3>Popular Recipes</h3>
-      <p>Browse this popular recipes..</p>
+      <p>Browse these popular recipes..</p>
       <% Recipe.all.most_commented[0..3].each do |r|%>
         <i class="fa fa-fire" style="color:red" aria-hidden="true"> <%=link_to r.name, r%></i><br><br>
       <%end%>
     </div>
     <div class="col-sm-4">
     <br>
-      <h3>Filter</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      <h3>Filter Recipes By:</h3>        
+      <%Category.all[0..12].each do |cat|%>
+      <%= link_to cat.name, cat%><br>
+      <%end%>
+    
     </div>
   </div>
 </div>

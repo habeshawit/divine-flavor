@@ -1,5 +1,6 @@
 class Recipe < ApplicationRecord
   belongs_to :user
+  belongs_to :category
 
   has_many :ingredients, dependent: :destroy
 
@@ -10,7 +11,7 @@ class Recipe < ApplicationRecord
   has_many :comments, :dependent => :destroy
   has_many :commented_users, through: :comments, source: :user
 
-  validates :name, :ingredients, :steps, presence: true
+  validates :name, :ingredients, :steps, :category_name, presence: true
 
   scope :most_commented, -> {left_joins(:comments).group('recipes.id').order('count(recipes.id) desc')}
 
@@ -27,6 +28,14 @@ class Recipe < ApplicationRecord
       if !@recipes.empty?
           return @recipes
       end
+  end
+
+  def category_name=(name)
+    self.category = Category.find_or_create_by(name: name)
+  end
+
+  def category_name
+     self.category ? self.category.name : nil
   end
 
 end
