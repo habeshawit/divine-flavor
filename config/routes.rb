@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :user_recipes, only: [:new, :create, :index, :destroy]
   resources :comments
+  resources :friendships, only: [:create, :destroy]
 
   resources :categories
   resources :recipes do
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   get '/add_recipe' => 'recipes#add_recipe'
   get '/my_favorites' => 'user_recipes#index'
   get '/update_bio' => 'users#update'
+  get '/my_friends' => 'users#my_friends'
 
   resources :users do
     resources :recipes, only: [:new, :create, :index]

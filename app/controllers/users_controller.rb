@@ -10,7 +10,11 @@ class UsersController < ApplicationController
         flash[:alert] = "No matching recipes found"
         redirect_to '/my_recipes'
       end
+    end
   end
+
+  def my_friends
+    @friends = current_user.friends
   end
 
   def show
@@ -23,7 +27,7 @@ class UsersController < ApplicationController
 
   def update
         if current_user.update(user_params)
-            flash[:notice]= "Bio successfully updated"
+            flash[:notice]= "Profile successfully updated"
             redirect_to user_path(current_user)
         else
             flash[:alert] = current_user.errors.full_messages[0]
@@ -42,6 +46,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:bio)
+    params.require(:user).permit(:bio, :avatar)
     end
 end

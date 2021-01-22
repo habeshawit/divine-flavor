@@ -1,29 +1,30 @@
+<div class="container recipe-form">
 <%= form_for @recipe do |f| %>  
 
   <div class="form-group <%= 'field_with_errors' if @recipe.errors[:name].any? %>">
   
-    <%= f.label :name %>
+    <strong style="color:red"><%= f.label :name %></strong>
     <%= f.text_field :name, :class=>"form-control", placeholder:"Give your recipe a name"%>
   </div>
 
 
 <div class="form-group <%= 'field_with_errors' if @recipe.errors[:prep_time].any? %>">
-    <%= f.label :prep_time %>
+    <strong style="color:red"><%= f.label :prep_time %></strong>
     <%= f.text_field :prep_time%> minutes
   </div>
 
 <div class="form-group <%= 'field_with_errors' if @recipe.errors[:cook_time].any? %>">
-    <%= f.label :cook_time %>
+    <strong style="color:red"><%= f.label :cook_time %></strong>
     <%= f.text_field :cook_time%> minutes
   </div>
 
   <div class="form-group <%= 'field_with_errors' if @recipe.errors[:description].any? %>">
-    <%= f.label :description %>
+    <strong style="color:red"><%= f.label :description %></strong>
     <%= f.text_area :description, :class=>"form-control", rows:"3", placeholder:"Add a description" %>
   </div>
 
     <div class="form-group <%= 'field_with_errors' if @recipe.errors[:category].any? %>">
-    <%= f.label :category %><br>
+    <strong style="color:red"><%= f.label :category %></strong><br>
     <%= f.text_field :category_name, list: "categories_autocomplete" %>
     <datalist id="categories_autocomplete">
       <% Category.all.each do |category| %>
@@ -33,7 +34,7 @@
   </div>
 
 <div class="form-group <%= 'field_with_errors' if @recipe.errors[:ingredient].any? %>">
-<%= f.label :ingredients%>
+<strong style="color:red"><%= f.label :ingredients%></strong>
   <div id='ingredients'>
     <%= f.fields_for :ingredients do |ingredient| %>
       <%= render 'ingredient_fields', :f => ingredient %>
@@ -45,7 +46,7 @@
 </div>
 
 <div class="form-group <%= 'field_with_errors' if @recipe.errors[:instructions].any? %>">
-  <%= f.label :instructions%>  
+  <strong style="color:red"><%= f.label :instructions%>  </strong>
   <div id='steps'>
     <%= f.fields_for :steps do |step| %>
       <%= render 'step_fields', :f => step %>
@@ -57,7 +58,7 @@
 </div>
 
 <div class="form-group <%= 'field_with_errors' if @recipe.errors[:images].any? %>">
-    <%= f.label :upload_images %> <br> 
+    <strong style="color:red"><%= f.label :upload_images %> </strong><br> 
     <%if @recipe.images.attached?%>
     <% @recipe.images.each do |image| %>
       <%= image_tag image.variant(resize_to_limit: [100, 100])  %>
@@ -73,7 +74,6 @@
     <%= f.button "Submit", :class=>"btn btn-success"%>  <button type="button" class="btn btn-success remove_link_colour" color="inherit"><%= link_to "Cancel", my_recipes_path%></button>
 
   <% end %>
-  
 
-
+  </div>
   </div>

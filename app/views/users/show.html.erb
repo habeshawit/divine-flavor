@@ -1,55 +1,79 @@
-<%if @user == current_user%>
-    <h1>Your Profile</h1>
-    <div class="container">
-        <div class="row">
-          <%if current_user.image%><img src="<%=current_user.image%>" width="220" height="220"><%end%>
-            <div class="col">
-                <strong>Username: </strong><%=current_user.name%><br>
-                <strong>Email: </strong><%=current_user.email%><br>
-                <strong>Number of Recipes Created: </strong><%=current_user.recipes.count%><br>
-                <strong>Number of Recipes Saved to Favorites: </strong><%=current_user.added_recipes.count%> <br>
-                <%if current_user.bio%>
-                    <strong>About Me: </strong><%=current_user.bio%> <br>
-                    <%=link_to "Edit my Bio", edit_user_path(current_user)%>
-                <%else%>
-                    <%=link_to "Add Bio", edit_user_path(current_user)%>
-
-                <%end%>
-            </div>
+<%if @user == current_user%>    
+    <div class="w3-container w3-padding-32 w3-center">  
+    <%= link_to 'Edit Account Profile', edit_user_registration_path, :class => 'navbar-link' %> | <%= link_to "Delete Account", user_path(current_user), method: :delete, data: {confirm: "Are you sure you want to delete your account?" } %><br><br>
+    <h3>About Me</h3><br>
+    <%if !current_user.avatar.blank?%>
+            <%= image_tag  current_user.avatar.variant(resize_to_limit: [300, 300])  %>
+          <%elsif current_user.image%>
+            <img src="<%=current_user.image%>" alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533"> 
+          <%end%>
+       <div class="w3-padding-32">
+        <h4><b><%=current_user.name%></b></h4>
+            <strong>Email: </strong><%=current_user.email%><br>
+            <strong>Number of Recipes Created: </strong><%=current_user.recipes.count%><br>
+            <strong>Number of Recipes Saved to Favorites: </strong><%=current_user.added_recipes.count%> <br><br>
+            
+            <%if current_user.bio%>
+                <p><%=current_user.bio%></p>
+                <%=link_to "Edit my Bio / Profile Pic", edit_user_path(current_user)%>
+            <%else%>
+                <%=link_to "Complete Profile", edit_user_path(current_user)%>    
+            <%end%>    
         </div>
-    </div><br>
+  </div><br>
 
-    <%= link_to 'Edit Account Profile', edit_user_registration_path, :class => 'navbar-link' %> | <%= link_to "Delete Account", user_path(current_user), method: :delete, data: {confirm: "Are you sure you want to delete your account?" } %>
-<%else%>
-    <h1><%="#{@user.name}'s Profile"%></h1>
-     <div class="container">
-        <div class="row">
-        
-          <%if @user.image%><img src="<%=@user.image%>" width="220" height="220"><%end%>
-            <div class="col">
-                <strong>Number of Recipes Created: </strong><%=@user.recipes.count%><br>
-                <strong>Number of Recipes Saved to Favorites: </strong><%=@user.added_recipes.count%> <br>
-                <%if @user.bio%>
-                    <strong>About Me: </strong><%=@user.bio%> <br>
-                <%end%><br>
-                <i class="fa fa-user-plus"> <em><strong><%=link_to "Add Friend"%></strong></em></i>
-            </div>
-        </div>
-    </div><br>
-
-    <h4>Recipes:</h4>
-
-    <% @user.recipes.each do |recipe|%>
-        <strong><%= link_to recipe.name, recipe%></strong> - <%=recipe.description%><br>
-    <%end%><br>
-
-
-    <h4><%if !@user.added_recipes.empty?%>
-    <h4>Favorites:</h4>
-        <% @user.added_recipes.each do |recipe|%>
-            <strong><%= link_to recipe.name, recipe%></strong> - <%=recipe.description%><br>
-        <%end%>   
-    <%end%><br>
     
-    <h4>Friends:</h4>
-<%end%>     
+<%else%>
+
+<div class="w3-container w3-padding-32 w3-center">  
+    <%if !@user.avatar.blank?%>
+        <%= image_tag  @user.avatar.variant(resize_to_limit: [300, 300])  %>
+    <%elsif @user.image%>
+        <img src="<%=@user.image%>" alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533"> 
+    <%end%>
+
+    <div class="w3-padding-32">
+        <h4><b><%=@user.name%></b></h4>
+            <%if !current_user.friends.include?(@user)%>
+                <i class="fa fa-user-plus"> <em><strong><%=link_to "Add Friend", friendships_path(friend: @user), class: "btn btn-sm btn-success", method: :post %></strong></em></i>
+            <%else%>
+                <span class="badge badge-warning remove_link_colour">
+                    <%= link_to "Stop following", friendship_path(@user), method: :delete, data: {confirm: 'Are you sure?'}%></td>
+                </span>
+            <%end%><br><br>
+            <strong>Number of Recipes Created: </strong><%=@user.recipes.count%><br>
+            <strong>Number of Recipes Saved to Favorites: </strong><%=@user.added_recipes.count%> <br><br>
+            
+            <%if @user.bio%>
+                <p><%=@user.bio%></p>
+            <%end%>   
+             
+            <h4>Recipes:</h4>
+
+            <% @user.recipes.each do |recipe|%>
+                <strong><%= link_to recipe.name, recipe%></strong> - <%=recipe.description%><br>
+            <%end%><br>
+
+
+            <%if !@user.added_recipes.empty?%>
+            <h4>Favorites:</h4>
+                <% @user.added_recipes.each do |recipe|%>
+                    <strong><%= link_to recipe.name, recipe%></strong> - <%=recipe.description%><br>
+                <%end%>   
+            <%end%><br>
+                
+            <%if !@user.friends.empty?%>
+            <h4>Friends:</h4>
+                <% @user.friends.each do |friend|%>
+                    <strong><%= link_to friend.name, user_path(friend)%></strong><br>
+                <%end%>   
+            <%end%><br>
+
+<%end%>
+        </div>
+  </div><br>
+
+
+  
+
+  

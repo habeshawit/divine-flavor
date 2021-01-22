@@ -8,23 +8,40 @@
       <%else%>
       <%= link_to (image_tag 'default_img.jpg', class: "recipe-index"), recipe%>
       <%end%>
-      <p><%= "Your Recipe" if recipe.user == current_user%></p>
-      <ul>
-        <li><%= recipe.name%></li>
-        <li><%= recipe.description%></li>    
+  
+        <h3><b><%= recipe.name%></b></h3>
+        <p><%= recipe.description%></p>    
       
       <%if recipe.user == current_user%>
-        <%= link_to "Edit", edit_recipe_path(recipe)%> |
-        <%= link_to "Delete", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{recipe.name}?" }%></li> 
+        <p><%= link_to "Edit", edit_recipe_path(recipe)%> |
+        <%= link_to "Delete", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to delete #{recipe.name}?" }%></p> 
       <%elsif !current_user.added_recipes.include?(recipe)%>
-        <i class="fa fa-heart" aria-hidden="true"><%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: recipe), method: :post%></i>
+        <p><i class="fa fa-heart" aria-hidden="true"><%= link_to "Add to my favorites", user_recipes_path(user: current_user, recipe: recipe), method: :post%></i></p> 
       <%else%>
-        <%= link_to "Remove from favorites", user_recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to remove #{recipe.name}?" }%></li> 
+        <p><%= link_to "Remove from favorites", user_recipe_path(recipe), method: :delete, data: {confirm: "Are you sure you want to remove #{recipe.name}?" }%></p> 
 
       <%end%>
-      </ul>
+
         </div>
       </div>
       <%end%>
    
 </div>
+
+ 
+  <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+    </div>
+  </div>
+  
+  <hr id="about">
+
+</body>
+  

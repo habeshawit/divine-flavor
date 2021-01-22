@@ -1,0 +1,20 @@
+<div class="container friends">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Friend</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@friends.each do |friend|%>
+    <tr>
+      <td><%=friend.name%></td>
+      <td><%= link_to "View Profile", user_path(friend), class:'btn btn-sm btn-info' %>
+          <%= link_to "Stop following", friendship_path(friend), method: :delete, data: {confirm: 'Are you sure?'},
+                                        class: 'btn btn-sm btn-warning'%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+</div>
