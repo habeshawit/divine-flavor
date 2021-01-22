@@ -13,7 +13,7 @@
     <%= f.file_field :avatar %>
   </div>
   
-    <%= f.button "Submit", :class=>"btn btn-success"%>  <button type="button" class="btn btn-success remove_link_colour" color="inherit"><%= link_to "Cancel", my_recipes_path%></button>
+    <%= f.button "Submit", :class=>"btn btn-success"%> <button type="button" class="btn btn-success remove_link_colour" color="inherit"><%= link_to "Cancel", user_path(current_user)%></button>
 
   <% end %>
   
