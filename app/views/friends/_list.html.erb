@@ -4,7 +4,7 @@
     <%@friends.each do |friend|%>
     <tr>
       <td><%=friend.name%></td>
-      <td><%=Friendship.where(friend_id: current_user.id).count%> followers</td>
+      <td><%=Friendship.where(friend_id: friend.id).count%> followers</td>
       <td><%= link_to "View Profile", user_path(friend), class:'btn btn-sm btn-info' %>
         <%if current_user.friends.include?(friend)%>
           <%= link_to "Stop following", friendship_path(friend), method: :delete, data: {confirm: 'Are you sure?'},

@@ -10,11 +10,9 @@ class RecipesController < ApplicationController
     def create
         @recipe = current_user.recipes.build(recipe_params)
        
-        # binding.pry
         if @recipe.save
-            # binding.pry
             flash[:notice]= "Recipe successfully saved"
-            redirect_to '/my_recipes'
+            redirect_to recipe_path(@recipe)
         else
             flash.now[:alert] = @recipe.errors.full_messages[0]          
             render 'new'       
