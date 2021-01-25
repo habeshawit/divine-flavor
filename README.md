@@ -1,26 +1,21 @@
-# README
+# Divine Flavor
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a recipe management app with a social aspect to it. Users can create and share their recipes with others as well as add friends and gain inspiration from their friends' recipes.
 
-Things you may want to cover:
+## Instructions
+To use this app, just clone this repo.
 
-* Ruby version
+And then execute:
 
-* System dependencies
+$ bundle install
 
-* Configuration
+## Usage
+After cloning the repository and running bundle, follow the steps below:
+1) Run: rake db:migrate
+2) Run: rake db:seed
+3) Run: rails s
+4) Follow onscreen prompts
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+## Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/habeshawit/edu_tasks.
 
