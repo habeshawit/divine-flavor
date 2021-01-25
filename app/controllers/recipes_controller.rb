@@ -52,7 +52,8 @@ class RecipesController < ApplicationController
             if !@recipes
             #   @recipes = []
               flash[:alert] = "No matching recipes found"
-              redirect_to '/recipes'
+            #   redirect_to '/recipes'
+            redirect_back(fallback_location: root_path)
             end
         end
     end
@@ -64,7 +65,8 @@ class RecipesController < ApplicationController
         if @recipe.save
             # binding.pry
             flash[:notice]= "Recipe successfully saved"
-            redirect_to '/my_recipes'
+            # redirect_to '/my_recipes'
+            redirect_back(fallback_location: root_path)
         else
             flash.now[:alert] = @recipe.errors.full_messages[0]          
             render 'new'       

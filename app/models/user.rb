@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :comments, :dependent => :destroy
   has_many :commented_recipes, through: :comments, source: :recipe
-  has_many :friendships
+  has_many :friendships, :dependent => :destroy
   has_many :friends, through: :friendships
   
   # Include default devise modules. Others available are:

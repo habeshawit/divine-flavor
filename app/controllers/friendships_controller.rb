@@ -7,13 +7,15 @@ class FriendshipsController < ApplicationController
       else
         flash[:alert] = "Oops! Looks like something went wrong!"
       end
-      redirect_to my_friends_path
+      # redirect_to my_friends_path
+      redirect_back(fallback_location: root_path)
     end
   
     def destroy
       friendship = current_user.friendships.where(friend_id: params[:id]).first
       friendship.destroy
       flash[:notice] = "Stopped following"
-      redirect_to my_friends_path
+      # redirect_to my_friends_path
+      redirect_back(fallback_location: root_path)
     end
   end
