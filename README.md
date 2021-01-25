@@ -17,5 +17,5 @@ After cloning the repository and running bundle, follow the steps below:
 4) Follow onscreen prompts
 
 ## Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/habeshawit/edu_tasks.
+Bug reports and pull requests are welcome on GitHub at https://github.com/habeshawit/divine-flavor.
 
