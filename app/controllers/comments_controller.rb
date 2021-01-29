@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     end
   
     def index
-      if params[:recipe_id] && @recipe = Recipe.find_by(id: params[:recipe_id])
+      if params[:recipe_id]
         @comments = @recipe.comments
         render :index
       else

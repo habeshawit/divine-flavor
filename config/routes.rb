@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :friendships, only: [:create, :destroy]
 
   resources :categories
+  
   resources :recipes do
     resources :comments, only: [:new, :create, :index, :destroy]
     member do

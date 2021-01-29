@@ -14,12 +14,12 @@
       <%=render 'recipes/search'%></div>
       <%end%>
       </div>
+      <div class="center">
     <div class="row">
       <div class="col-sm-4">
       <br>
         <h3>Featured Recipe</h3>
         <p>Try out this delicious recipe and make it your own!</p>
-        <div class="text-center">
         <p><%if recipe = Recipe.order(Arel.sql('RANDOM()')).first%></p>
         <strong><%=link_to recipe.name, recipe%></strong><br>
         <%if !recipe.images.empty?%>
@@ -27,7 +27,6 @@
         <%end%><br>
         <i class="fa fa-heart" style="color:red" aria-hidden="true"> </i> <%=recipe.description%> 
         <%end%>
-        </div>
         </div>
         
       <div class="col-sm-4">
@@ -41,7 +40,7 @@
       <div class="col-sm-4">
       <br>
         <h3>Filter Recipes By:</h3>        
-        <%Category.all[0..12].each do |cat|%>
+        <%Category.all[0..10].each do |cat|%>
         <%= link_to cat.name, cat%><br>
         <%end%>
       
