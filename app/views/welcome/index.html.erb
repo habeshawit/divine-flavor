@@ -19,6 +19,7 @@
       <br>
         <h3>Featured Recipe</h3>
         <p>Try out this delicious recipe and make it your own!</p>
+        <div class="text-center">
         <p><%if recipe = Recipe.order(Arel.sql('RANDOM()')).first%></p>
         <strong><%=link_to recipe.name, recipe%></strong><br>
         <%if !recipe.images.empty?%>
@@ -26,6 +27,7 @@
         <%end%><br>
         <i class="fa fa-heart" style="color:red" aria-hidden="true"> </i> <%=recipe.description%> 
         <%end%>
+        </div>
         </div>
         
       <div class="col-sm-4">

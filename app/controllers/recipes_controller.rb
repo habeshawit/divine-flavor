@@ -2,7 +2,6 @@ class RecipesController < ApplicationController
     before_action :find_recipe, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
 
-
     def new 
         @recipe = Recipe.new
     end
@@ -75,7 +74,6 @@ class RecipesController < ApplicationController
     end
 
     def destroy
-        # binding.pry
         if @recipe.destroy
             flash[:notice]= "Recipe successfully deleted"
             redirect_back(fallback_location: root_path)
@@ -83,7 +81,6 @@ class RecipesController < ApplicationController
             flash[:alert] = @recipe.errors.full_messages
             render 'show'
           end
-        # redirect_to '/my_recipes'
     end 
 
     def delete_image_attachment

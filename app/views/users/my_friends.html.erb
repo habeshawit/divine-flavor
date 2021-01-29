@@ -3,5 +3,6 @@
 <% if !@friends.empty?%>
     <%= render 'friends/list'%>
 <% else %>
-    Looks like you haven't added any friends
+    Looks like you haven't added any friends  
 <%end%>
+<br><%= link_to 'Back', :back %>

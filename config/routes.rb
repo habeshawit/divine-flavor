@@ -13,12 +13,11 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } 
-  root 'welcome#index'
 
+  root 'welcome#index'
   get '/my_recipes', to: 'users#my_recipes'
   get '/delete_recipe', to: 'recipes#destroy'
   devise_scope :user do get '/logout' => 'devise/sessions#destroy' end
-
   get '/add_recipe' => 'recipes#add_recipe'
   get '/my_favorites' => 'user_recipes#index'
   get '/update_bio' => 'users#update'
@@ -28,15 +27,5 @@ Rails.application.routes.draw do
     resources :recipes, only: [:new, :create, :index]
   end
 
-
-
-
-  
-
-  
-
-  #possible nested route
-  #'recipes/:id/comments'
-  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

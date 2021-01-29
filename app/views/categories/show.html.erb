@@ -3,5 +3,6 @@
 <%if !@recipes.empty?%>
     <%= render '/recipes/home'%>
 <%else%>
-    Looks like there are no recipes in this category
+    Looks like there are no recipes in this category   
 <%end%>
+<br><%= link_to 'Back', :back %>
