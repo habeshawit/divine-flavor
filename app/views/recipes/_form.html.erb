@@ -17,8 +17,7 @@
 
 <%= form_for @recipe do |f| %>  
 
-  <div class="form-group <%= 'field_with_errors' if @recipe.errors[:name].any? %>">
-  
+  <div class="form-group <%= 'field_with_errors' if @recipe.errors[:name].any? %>">  
     <strong style="color:red"><%= f.label :name %></strong>
     <%= f.text_field :name, :class=>"form-control", placeholder:"Give your recipe a name"%>
   </div>
@@ -92,4 +91,4 @@
   <% end %>
 
   </div>
-  </div>
+</div>

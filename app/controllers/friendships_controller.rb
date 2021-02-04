@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+
     def create
       friend = User.find(params[:friend])
       current_user.friendships.build(friend_id: friend.id)
@@ -7,7 +8,6 @@ class FriendshipsController < ApplicationController
       else
         flash[:alert] = "Oops! Looks like something went wrong!"
       end
-      # redirect_to my_friends_path
       redirect_back(fallback_location: root_path)
     end
   
@@ -15,7 +15,6 @@ class FriendshipsController < ApplicationController
       friendship = current_user.friendships.where(friend_id: params[:id]).first
       friendship.destroy
       flash[:notice] = "Stopped following"
-      # redirect_to my_friends_path
       redirect_back(fallback_location: root_path)
     end
   end
