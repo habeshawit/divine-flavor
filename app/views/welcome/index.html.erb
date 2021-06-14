@@ -14,36 +14,41 @@
       <%=render 'recipes/search'%></div>
       <%end%>
       </div>
-      <div class="center">
+      <div class="center-home">
     <div class="row">
       <div class="col-sm-4">
       <br>
         <h3>Featured Recipe</h3>
         <p>Try out this delicious recipe and make it your own!</p>
-        <p><%if recipe = Recipe.order(Arel.sql('RANDOM()')).first%></p>
-        <strong><%=link_to recipe.name, recipe%></strong><br>
-        <%if !recipe.images.empty?%>
-          <%= link_to image_tag(recipe.images.first.variant(resize: "280x200")), recipe %>
-        <%end%><br>
-        <i class="fa fa-heart" style="color:red" aria-hidden="true"> </i> <%=recipe.description%> 
-        <%end%>
+          <div class="home-box">
+          <p><%if recipe = Recipe.order(Arel.sql('RANDOM()')).first%></p>
+          <strong><%=link_to recipe.name, recipe%></strong><br>
+          <%if !recipe.images.empty?%>
+            <%= link_to image_tag(recipe.images.first.variant(resize: "280x200")), recipe %>
+          <%end%><br>
+          <i class="fa fa-heart" style="color:red" aria-hidden="true"> </i> <%=recipe.description%> 
+          <%end%>
+          </div>
         </div>
-        
       <div class="col-sm-4">
-      <br>
-        <h3>Popular Recipes</h3>
-        <p>Browse these popular recipes..</p>
-        <% Recipe.all.most_commented[0..4].each do |r|%>
-          <i class="fa fa-fire" style="color:red" aria-hidden="true">  </i> <%=link_to r.name, r%> <br><br>
-        <%end%>
-      </div>
+        <br>
+          <h3>Popular Recipes</h3>
+          <p>Browse these popular recipes..</p>
+          <div class="home-box" style="text-align: left!importants;">
+              <% Recipe.all.most_commented[0..4].each do |r|%>
+                <i class="fa fa-fire" style="color:red" aria-hidden="true">  </i> <%=link_to r.name, r%> <br><br>
+              <%end%>
+            </div>
+       </div>
+
       <div class="col-sm-4">
-      <br>
-        <h3>Filter Recipes By:</h3>        
-        <%Category.all[0..10].each do |cat|%>
-        <%= link_to cat.name, cat%><br>
-        <%end%>
-      
+        <br>
+          <h3>Filter Recipes By:</h3>   
+           <div class="home-box" style="text-align: right!importants;">     
+              <%Category.all[0..10].each do |cat|%>
+              <%= link_to cat.name, cat%><br>
+              <%end%>
+            </div>
       </div>
     </div>
   </div>

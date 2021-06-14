@@ -1,17 +1,25 @@
 <div class="container friends">
-<table class="table table-hover">
-  <tbody>
-    <%@friends.each do |friend|%>
-    <tr>
-      <td><%=friend.name%></td>
-      <td><%=Friendship.where(friend_id: friend.id).count%> followers</td>
-      <td><%= link_to "View Profile", user_path(friend), class:'btn btn-sm btn-info' %>
-        <%if current_user.friends.include?(friend)%>
-          <%= link_to "Stop following", friendship_path(friend), method: :delete, data: {confirm: 'Are you sure?'},
-                                        class: 'btn btn-sm btn-warning'%></td>
-        <%end%>
-    </tr>
-    <%end%>
-  </tbody>
-</table>
+  <table class="table table-hover">
+    <tbody>
+      <%@friends.each do |friend|%>
+        <tr>
+          <td><% if friend.avatar.attached? %>
+              <%= image_tag friend.avatar.variant(resize_to_limit: [500, 500])  %>
+              <%end%>
+          </td>
+          <td>
+              <b><%=friend.name%> </b><br> 
+              <p style="color: lightgray font-size: 5pt"><%=Friendship.where(friend_id: friend.id).count%> followers </p><br>
+          </td>
+          <td>
+              <%= link_to "View Profile", user_path(friend), class:'btn btn-sm btn-info' %> <br>
+              <%if current_user.friends.include?(friend)%>
+                <%= link_to "Unfollow", friendship_path(friend), method: :delete, data: {confirm: 'Are you sure?'},
+                                            class: 'btn btn-sm btn-warning'%>
+              <%end%>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
 </div>

@@ -38,9 +38,9 @@
     <%= f.text_area :description, :class=>"form-control", rows:"3", placeholder:"Add a description" %>
   </div>
 
-    <div class="form-group <%= 'field_with_errors' if @recipe.errors[:category].any? %>">
+  <div class="form-group <%= 'field_with_errors' if @recipe.errors[:category].any? %>">
     <strong style="color:red"><%= f.label :category %></strong><br>
-    <%= f.text_field :category_name, list: "categories_autocomplete" %>
+    <%= f.text_field :category_name, list:"categories_autocomplete" %>
     <datalist id="categories_autocomplete">
       <% Category.all.each do |category| %>
         <option value="<%= category.name %>">
