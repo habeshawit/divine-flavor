@@ -57,7 +57,10 @@
               <% @comments.each do |comment|%>
               <div class="comments-list">
                 
-              <%posted_at = Time.now.day - comment.created_at.day%> 
+              <%# <%posted_at = Time.now.day - comment.created_at.day%>  
+             
+              <%posted_at = ((Date.today - comment.created_at.to_date).to_i)/30%> 
+
               <p><b><%= link_to comment.user.name, user_path(comment.user)    %></b> says <%= comment.content%>
                 <%if posted_at == 0%>
                   <small class="pull-right">posted just now</small>

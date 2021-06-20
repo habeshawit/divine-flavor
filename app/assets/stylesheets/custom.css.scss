@@ -138,6 +138,7 @@ img.recipe-index{
 
 // }
 
+
 .jumbotron{
     background-image: asset-url('4.jpg');
     background-position: center center;
@@ -490,3 +491,79 @@ body {
   margin-bottom:0rem!important;
 }
 
+.center-home img{
+  border-radius: 0.75rem!important;
+  text-align: center!important;
+}
+
+.center-home{
+  background: lightgoldenrodyellow;
+  text-align: center;
+}
+
+.center-home .col-sm-4{
+  // margin:5px!important;
+  border: solid orange;
+  margin-right: 0px; 
+  margin-left: 0px;
+}
+
+.center-home .row{
+  margin-right: 0px; 
+  margin-left: 0px;
+  border: solid orange;
+}
+
+.img-responsive{
+    width:100%;
+    // height: 230px;
+
+}
+
+
+.home-landing-container{
+  // margin: 150px;
+  // text-align: center;
+
+  // width: 100%;
+  // padding: 40px;
+  text-align: center;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+}
+
+.home-landing-container #image{
+  background-image: asset-url('4.jpg');
+  margin: 70px;
+}
+
+.home-landing-container .row{
+  width:80vw!important;
+}
+
+.btns a{
+  background: gold;
+    border-radius: 2rem;
+    padding: .25rem;
+    margin: 20px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.btns{
+  padding:2rem;
+}
+
+
+// .container {
+//   width: 100%;
+//   /* padding-right: 15px; */
+//   /* padding-left: 15px; */
+//   /* margin-right: auto; */
+//   /* margin-left: auto; */
+// }

@@ -60,8 +60,9 @@
         <div class="col-4">
             <%if !@user.friends.empty?%>
                 <h4><b>Friends (<%=@user.friends.count%>)</b></h4>
-                <%@friends=@user.friends%>
-                <%=render '/friends/list'%>   
+                <%@friends=@user.friends[0..6]%>
+                <%=render '/friends/list'%>  
+                <%= link_to "See all friends", friendship_path(@user.friends)%>
             <%end%>
         </div>
 
